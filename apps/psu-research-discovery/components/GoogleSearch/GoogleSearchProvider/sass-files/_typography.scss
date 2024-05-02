@@ -1,0 +1,423 @@
+//===========================
+// Typography
+//===========================
+@import 'breakpoints';
+// When you add a new mixin here, make sure to add it to the
+// exports declaration/class name at the end of the file.
+// This will make sure it ends up in the style guide swatches.
+
+// Titles
+@mixin title-mega {
+  font-size: 40px;
+  line-height: 45px;
+  font-weight: var(--font-weight-xbold);
+  letter-spacing: var(--font-ls-xsmall);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 50px;
+    line-height: 52px;
+    letter-spacing: var(--font-ls-large);
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 74px;
+    line-height: 76px;
+  }
+}
+
+@mixin title-xxlarge {
+  font-size: 34px;
+  line-height: 38px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-xsmall);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 48px;
+    line-height: 53px;
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 70px;
+    line-height: 72px;
+    letter-spacing: var(--font-ls-large);
+  }
+}
+
+@mixin title-xlarge {
+  font-size: 30px;
+  line-height: 34px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-medium);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 36px;
+    line-height: 38px;
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 55px;
+    line-height: 59px;
+    letter-spacing: var(--font-ls-large);
+  }
+}
+
+@mixin title-large {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-medium);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 30px;
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 42px;
+    line-height: 44px;
+  }
+}
+
+@mixin title-medium {
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-xxlarge);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 24px;
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 30px;
+    line-height: 33px;
+    letter-spacing: var(--font-ls-medium);
+  }
+}
+
+@mixin title-small {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-medium);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-desktop) {
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+
+@mixin title-xsmall {
+  font-size: 17px;
+  line-height: 19px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-mega);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-desktop) {
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
+@mixin title-xxsmall {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-mega);
+  font-family: var(--font-family-sans);
+}
+
+// Body
+@mixin body-xxlarge {
+  font-size: 25px;
+  line-height: 29px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-xxsmall);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: var(--font-ls-xsmall);
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 42px;
+    line-height: 50px;
+    letter-spacing: var(--font-ls-medium);
+  }
+}
+
+@mixin body-xlarge {
+  font-size: 23px;
+  line-height: 28px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--font-ls-xsmall);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 25px;
+    line-height: 29px;
+    letter-spacing: var(--font-ls-small);
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 33px;
+    line-height: 39px;
+    letter-spacing: var(--font-ls-medium);
+  }
+}
+
+@mixin body-large {
+  font-size: 21px;
+  line-height: 28px;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--font-ls-xsmall);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 22px;
+    letter-spacing: var(--font-ls-small);
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: var(--font-ls-medium);
+  }
+}
+
+@mixin body-medium {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--font-ls-xxsmall);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 19px;
+    line-height: 28px;
+    letter-spacing: var(--font-ls-small);
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 23px;
+    line-height: 33px;
+    letter-spacing: var(--font-ls-medium);
+  }
+}
+
+@mixin body-small {
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--font-ls-small);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: var(--font-ls-medium);
+  }
+}
+
+@mixin body-xsmall {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--font-ls-small);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-tablet) {
+    font-size: 17px;
+  }
+
+  @include breakpoint($bp-desktop) {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: var(--font-ls-medium);
+  }
+}
+
+@mixin body-xxsmall {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--font-ls-small);
+  font-family: var(--font-family-sans);
+
+  @include breakpoint($bp-desktop) {
+    letter-spacing: var(--font-ls-xlarge);
+  }
+}
+
+// The below consists of naked elements. This is used
+// when a component includes a text field that is WYSIWYG
+// and dangerouslySetInnerHTML is used to wrap the prop.
+// See text-content and text-block-intro as examples.
+@mixin wysiwyg-text {
+  h2 {
+    @include title-large;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    @include title-medium;
+  }
+
+  h4 {
+    @include title-small;
+  }
+
+  h5 {
+    @include title-xsmall;
+  }
+
+  h6 {
+    @include title-xxsmall;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 8px;
+  }
+
+  p {
+    @include body-medium;
+    margin-bottom: 28px;
+
+    @include breakpoint($bp-tablet) {
+      margin-bottom: 32px;
+    }
+
+    @include breakpoint($bp-desktop) {
+      margin-bottom: 40px;
+    }
+  }
+
+  a {
+    font-weight: bold;
+    color: var(--color-pa-link);
+  }
+
+  ul li {
+    position: relative;
+    padding-left: 24px;
+
+    &::before {
+      content: '\25A0';
+      position: absolute;
+      display: inline-block;
+      margin-left: -24px;
+      width: 10px;
+      color: var(--color-pa-sky);
+    }
+  }
+
+  ol li {
+    list-style: inside;
+    list-style-type: decimal;
+  }
+
+  ul li,
+  ol li {
+    margin-bottom: 12px;
+  }
+}
+
+// Exporting the mixin names/classes here so we can display them in the style guide.
+.titleMega {
+  @include title-mega;
+}
+
+.titleXxlarge {
+  @include title-xxlarge;
+}
+
+.titleXlarge {
+  @include title-xlarge;
+}
+
+.titleLarge {
+  @include title-large;
+}
+
+.titleMedium {
+  @include title-medium;
+}
+
+.titleSmall {
+  @include title-small;
+}
+
+.titleXsmall {
+  @include title-xsmall;
+}
+
+.titleXxsmall {
+  @include title-xxsmall;
+}
+
+.bodyXxlarge {
+  @include body-xxlarge;
+}
+
+.bodyXlarge {
+  @include body-xlarge;
+}
+
+.bodyLarge {
+  @include body-large;
+}
+
+.bodyMedium {
+  @include body-medium;
+}
+
+.bodySmall {
+  @include body-small;
+}
+
+.bodyXsmall {
+  @include body-xsmall;
+}
+
+.bodyXxsmall {
+  @include body-xxsmall;
+}
+
+:export {
+  // sass-lint:disable-block no-misspelled-properties no-color-keywords
+  titleSizes: {
+    titleMega: titleMega;
+    titleXxLarge: titleXxlarge;
+    titleXLarge: titleXlarge;
+    titleLarge: titleLarge;
+    titleMedium: titleMedium;
+    titleSmall: titleSmall;
+    titleXSmall: titleXsmall;
+    titleXxSmall: titleXxsmall;
+  };
+  bodySizes: {
+    bodyXxLarge: bodyXxlarge;
+    bodyXLarge: bodyXlarge;
+    bodyLarge: bodyLarge;
+    bodyMedium: bodyMedium;
+    bodySmall: bodySmall;
+    bodyXSmall: bodyXsmall;
+    bodyXxSmall: bodyXxsmall;
+  };
+}

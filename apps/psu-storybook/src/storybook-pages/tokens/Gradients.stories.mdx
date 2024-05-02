@@ -1,0 +1,52 @@
+<!-- Colors.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme, gradients } from '@psu-flex/core-ui';
+import { copyToken } from './sb-doc-theme-functions/copy-token.ts';
+import { SbGradientsComponent } from './sb-doc-theme-functions/sb-doc-gradients.jsx';
+
+<Meta title="Tokens/Gradients" />
+
+# Gradients
+
+<div styles={{ background: '#eeeeee' }}>
+  <div style={{ borderBottom: '1px solid gray', marginBottom: '2rem' }}>
+    <h3>All available gradient tokens are listed here. </h3>
+    <p>
+      Each gradient token is defined in figma and pushed into the tokens branch
+      <a href="https://github.com/Penn-State-Web-and-Digital/psu-flex-mono/blob/packages/platform-theme/src/figma/theme.json">
+        {' '}
+        here.{' '}
+      </a>
+      These are accessible through importing the theme object &
+      using the names listed below.
+    </p>
+
+  </div>
+  <p style={{fontWeight: '500', fontSize: '16px', marginBottom: '48px', textAlign: 'center' }}>
+    *Click to copy token*
+  </p>
+ <SbGradientsComponent/>
+</div>
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>
+  Accessing the gradient tokens
+</h2>
+
+<p>
+  **Access any gradient token by using importing the theme and adding the
+  gradient as a backgroundImage
+</p>
+
+```jsx
+import { gradients } from '..'
+
+//for functional components
+<Flex extraSx={{ backgroundImage: () => `${gradients['hero']}`}}>...</Flex>
+
+//for base html elements
+<div sx={{ backgroundImage: () => `${gradients['hero']}`}}>...</div>
+<div sx={{ backgroundImage: () => `${gradients['lightBox']}`}}>...</div>
+<div sx={{ backgroundImage: () => `${gradients['powerFacts']}`}}>...</div>
+```

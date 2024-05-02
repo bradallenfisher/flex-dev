@@ -1,0 +1,183 @@
+import { Meta } from '@storybook/addon-docs/';
+import { Icon } from '@psu-flex/core-ui';
+
+<Meta title="Style Guide/Responsive styling" />
+
+<h1>Responsive design using sx and extraSx</h1>
+<br />
+<br />
+<br />
+
+<h3>
+  Like Styled System, we use responsive array syntax.{' '}
+  <a href="https://theme-ui.com/sx-prop#responsive-values">
+    Click here for docs
+  </a>
+</h3>
+
+<p>
+  Responsiveness can be achieved with a shorthand syntax for writing
+  mobile-first responsive styles using arrays as values.
+</p>
+
+```jsx
+<Flex extraSx={{gridColumn: ['1/5', '2/8', '3/11', '3/11']}}>
+{...}
+</Flex>
+```
+
+<p>
+  In this example we're setting our gridColumn to 4 different values depending
+  on the breakpoint. This is how it reads :
+</p>
+
+```jsx
+gridColumn: [
+  'value at sm breakpoint',
+  'value at md breakpoint',
+  'value at lg breakpoint',
+  'value at xl breakpoint',
+];
+```
+
+<p>
+Responsive array syntax can be used for any css property inside the sx prop or the extraSx prop.
+
+</p>
+
+```jsx
+<Flex extraSx={{ p: [1, 2, 3, 4], m: [1, 2, 3, 4] }}>
+  <div sx={{ backgroundColor: ['link', 'nittanyNavy', 'coalyGray', 'white'] }}>
+    <h1
+      sx={{
+        lineHeight: ['120', '140', '150', '150'],
+        fontSize: [32, 36, 40, 44],
+      }}
+    >
+      Heading
+    </h1>
+  </div>
+</Flex>
+```
+
+<br />
+
+<h3>Utilities for hiding elements at breakpoints</h3>
+<p>
+  If you need to hide an element at a breakpoint, these display: 'none' utility
+  classes have the media query already set up with the design system
+  breakpoints.
+</p>
+
+<div style={{display: 'flex', flexDirection: 'column', gap: '8px', width: 'fit-content'}}>
+<table>
+  <caption
+    style={{
+      textAlign: 'left',
+      fontSize: '16px',
+      paddingBottom: '12px',
+      fontWeight: '700',
+    }}
+  >
+    Above breakpoint
+  </caption>
+  <tr>
+    <th style={{ textAlign: 'left', paddingRight: '150px' }}>className</th>
+    <th style={{ textAlign: 'left', paddingRight: '150px' }}>css</th>
+  </tr>
+  <tr>
+    <td>hidden-above-sm</td>
+    <td>@media (min-width: 360px) display: none;</td>
+  </tr>
+  <tr>
+    <td>hidden-above-md</td>
+    <td>@media (min-width: 768px) display: none;</td>
+  </tr>
+  <tr>
+    <td>hidden-above-lg</td>
+    <td>@media (min-width: 1080px) display: none;</td>
+  </tr>
+  <tr>
+    <td>hidden-above-xl</td>
+    <td>@media (min-width: 1440px) display: none;</td>
+  </tr>
+</table>
+
+<table>
+  <caption
+    style={{
+      textAlign: 'left',
+      fontSize: '16px',
+      paddingBottom: '12px',
+      fontWeight: '700',
+    }}
+  >
+    Below breakpoint
+  </caption>
+  <tr>
+    <th style={{ textAlign: 'left', paddingRight: '150px' }}>className</th>
+    <th style={{ textAlign: 'left', paddingRight: '150px' }}>css</th>
+  </tr>
+
+  <tr>
+    <td>hidden-below-md</td>
+    <td>@media (max-width: 768px) display: none;</td>
+  </tr>
+  <tr>
+    <td>hidden-below-lg</td>
+    <td>@media (max-width: 1080px) display: none;</td>
+  </tr>
+  <tr>
+    <td>hidden-below-xl</td>
+    <td>@media (max-width: 1440px) display: none;</td>
+  </tr>
+</table>
+
+<table>
+  <caption
+    style={{
+      textAlign: 'left',
+      fontSize: '16px',
+      paddingBottom: '12px',
+      fontWeight: '700',
+    }}
+  >
+    At breakpoint range
+  </caption>
+  <tr>
+    <th style={{ textAlign: 'left', paddingRight: '150px' }}>className</th>
+    <th style={{ textAlign: 'left', paddingRight: '150px' }}>css</th>
+  </tr>
+  <tr>
+    <td>hidden-at-md</td>
+    <td>@media (min-width: 360px) and (max-width: 767.9px) display: none;</td>
+  </tr>
+  <tr>
+    <td>hidden-at-lg</td>
+    <td>@media (min-width: 768px) and (max-width: 1079.9px) display: none;</td>
+  </tr>
+  <tr>
+    <td>hidden-at-xl</td>
+    <td>@media (min-width: 1080px) and (max-width: 1440px) display: none;</td>
+  </tr>
+</table>
+</div>
+
+<br />
+
+<h3>Media Queries</h3>
+<p>
+  If you prefer standard CSS media query syntax, you can use nested objects for
+  responsive styles as well.
+</p>
+
+```jsx
+<div
+  sx={{
+    width: '100%',
+    '@media screen and (min-width: 40em)': {
+      width: '50%',
+    },
+  }}
+/>
+```

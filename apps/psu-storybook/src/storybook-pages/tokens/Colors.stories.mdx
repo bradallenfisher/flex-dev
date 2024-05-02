@@ -1,0 +1,45 @@
+<!-- Colors.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme } from '@psu-flex/core-ui';
+import {
+  categorizedColors,
+  ColorsComponent,
+} from './sb-doc-theme-functions/sb-doc-colors.jsx';
+
+<Meta title="Tokens/Colors" />
+
+# Color Palette
+
+<div>
+
+</div>
+
+<ColorsComponent />
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>
+  Accessing the color tokens
+</h2>
+
+<p>
+  **Access any color token by using the sx prop and passing in the necessary
+  token key into color, bg, backgroundColor, borderColor, caretColor,
+  outlineColor or textDecorationColor. These CSS properties will use values
+  defined in the theme when available.
+</p>
+
+```jsx
+
+// for functional components
+<Flex extraSx={{ color: 'link'}}>...</Flex>
+
+// for base HTML elements
+<div sx={{color: 'link'}}/>
+<div sx={{backgroundColor: 'nittanyNavy'}}/>
+<div sx={{borderColor: 'coalyGray'}}/>
+
+// some functional components have built-in color props that reference tokens automatically
+<Heading color="link" variant={32}>text</Heading>
+<Icon color="nittanyNavy" icon='rightArrow'/>
+```

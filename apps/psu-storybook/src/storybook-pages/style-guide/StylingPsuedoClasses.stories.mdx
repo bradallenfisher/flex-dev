@@ -1,0 +1,126 @@
+import { Meta } from '@storybook/addon-docs/';
+import { Icon } from '@psu-flex/core-ui';
+
+<Meta title="Style Guide/Psuedo-classes styling" />
+
+<h1>Styling with Psuedo-classes</h1>
+<br/>
+<br/>
+<br/>
+
+<h3>
+  Like material, psuedo-classes are added into native html with sx or functional components with extraSx
+</h3>
+<br/>
+
+<p>
+Use material's psuedo class syntax for hover, focus, active, etc.
+</p>
+
+```jsx
+<Flex extraSx={{'&:hover': { color: '#000' }, '&:active': { color: '#333' }, '&:focus': { color: '#666' }}}>
+{...}
+</Flex>
+```
+<br/>
+
+<p>
+ Target html elements by their tag, className, id, etc.
+</p>
+
+```jsx
+<div sx={{'& > p': { color: '#000' }, '& > #2nd-child-id': { color: '#333' }, '& > .3rd-child-class': { color: '#666' }}}>
+ <p>child 1</p>
+ <div id='2nd-child-id'>child 2</div>
+ <h1 className="3rd-child-class">child 3</h1>
+</div>
+```
+<br/>
+
+<p>
+ Target nested elements and also by their index.
+</p>
+
+```jsx
+<ul sx={{'& > li:last-child': { backgroundColor: 'red' }}}>
+  <li>
+    <a>link 1</a>
+  </li>
+  <li>
+    <a>link 2</a>
+  </li>
+  <li>
+    <a>link 3 - the li parent of this child is targeted</a>
+  </li>
+</ul>
+
+
+
+// a great use case for this is when using the ListBox component, you can target the last child.
+
+<ListBox
+  extraSx={{
+    '& > li:last-child': {
+      backgroundColor: 'red',
+    },
+  }}
+  items={optionsContact}
+>
+  {(item) => (
+    <Item key={item}>
+      <Link
+        to={item.href}
+      >
+        {item.value}
+      </Link>
+    </Item>
+  )}
+</ListBox>
+```
+<br/>
+
+<p>
+ Targeting all children
+
+</p>
+
+```jsx
+<div sx={{'& > *': { color: '#000' }}}>
+ <div>child 1</div>
+ <div>child 2</div>
+ <div>child 3</div>
+</div>
+```
+
+<br/>
+<p>
+ Targeting next immediate child
+
+</p>
+
+```jsx
+<div sx={{'& > +': { color: '#000' }}}>
+ <div>This is the child that is targeted</div>
+ <div>This is not</div>
+ <div>This is not</div>
+</div>
+```
+
+<br/>
+<p>
+ Targeting deeply nested child
+
+</p>
+
+```jsx
+<div sx={{'& > div > span > p': { color: '#000' }}}>
+ <span>This is NOT the child that is targeted</span>
+ <div>
+  <span>
+    <p>This IS the child that is targeted
+  </span>
+ </div>
+ <span>This is NOT the child that is targeted</span>
+ <span>This is NOT the child that is targeted</span>
+</div>
+```

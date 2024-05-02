@@ -1,0 +1,65 @@
+<!-- Colors.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme } from '@psu-flex/core-ui';
+import { copyToken } from './sb-doc-theme-functions/copy-token.ts';
+import { SbBordersComponent } from './sb-doc-theme-functions/sb-doc-borders.jsx';
+
+<Meta title="Tokens/Borders" />
+
+# Borders
+
+<div styles={{ background: '#eeeeee' }}>
+  <div style={{ borderBottom: '1px solid gray', marginBottom: '2rem' }}>
+    <h3>All available border tokens are listed here. </h3>
+    <p>
+      Each border token is defined in figma and pushed into the tokens branch
+      <a href="https://github.com/Penn-State-Web-and-Digital/psu-flex/blob/tokens/theme/src/figma/theme.json">
+        {' '}
+        here.
+      </a>
+      These are then exposed by theme.ui and accessible through the sx prop
+      using the names listed below.
+    </p>
+  </div>
+  <h3>Using borderWidth tokens</h3>
+<p>
+  BorderWidth tokens are defined by size key.
+</p>
+<p
+  style={{
+    fontWeight: '500',
+    fontSize: '16px',
+    marginBottom: '24px',
+    marginTop: '48px',
+    textAlign: 'center',
+  }}
+>
+  *Click to copy token*
+</p>
+<SbBordersComponent/>
+<h4 style={{ border: 'none', marginTop: '50px' }}>
+  Accessing the borderWidth tokens
+</h4>
+
+```jsx
+<div sx={{ borderWidth: 'sm' }} />
+
+//same for functional components just use extraSx prop instead of sx
+<Flex extraSx={{ borderWidth: 'sm' }} />
+```
+
+</div>
+
+<h3 style={{ border: 'none', marginTop: '50px' }}>Dividers & border tokens</h3>
+
+<p>
+  **Divider is built on top the borderWidth token, meaning props will
+  automatically handle token references. Access borderWidth tokens through
+  thickness prop.
+</p>
+
+```jsx
+<Divider thickness="lg" />
+```

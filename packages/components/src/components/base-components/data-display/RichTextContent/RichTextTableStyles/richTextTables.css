@@ -1,0 +1,14 @@
+.rt-tbl-modal-dt {
+  font-weight: bold;
+  margin-bottom: 4px;
+  line-height: 140%;
+}
+
+.rt-tbl-modal-dd {
+  margin-inline: 0;
+  line-height: 150%;
+}
+
+.rt-tbl-modal-dd:not(:last-child) {
+  margin-bottom: 20px;
+}

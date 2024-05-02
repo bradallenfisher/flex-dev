@@ -1,0 +1,30 @@
+// @import '../GoogleSearchProvider//sass-files/init';
+
+// NOTE: Styles diverge from our component patterns for the search page.
+// We do this to match the PSU WWW version of search, which uses Google
+// custom search.
+/* .container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 14px;
+  padding: 0 4px 0 10px;
+
+  @include breakpoint($bp-desktop) {
+    margin: 9px 0 6px;
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+.page {
+  margin-right: 1.25rem;
+  font-size: 1.25rem;
+  color: var(--color-slate);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}*/

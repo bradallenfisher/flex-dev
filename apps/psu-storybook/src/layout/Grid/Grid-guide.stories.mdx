@@ -1,0 +1,167 @@
+<!-- Colors.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import {
+  theme,
+  contentContainerMargins,
+  contentContainerMinWidths,
+} from '@psu-flex/core-ui';
+
+<Meta title="Layout/Grid/Grid Guide" />
+
+# Grid
+
+<div styles={{ background: '#eeeeee' }}>
+  <div style={{ borderBottom: '1px solid gray', marginBottom: '2rem' }}>
+    <h3>Grid component defaults</h3>
+  </div>
+  <table>
+    <tc></tc>
+  <tr>
+    <th style={{textAlign: 'left', paddingRight: '150px'}}>Breakpoint</th>
+    <th  style={{textAlign: 'left', paddingRight: '75px'}}>{'360px'}</th>
+  {Object.entries(theme.breakpoints).map(([k, v]) => {
+    return <th  style={{textAlign: 'left', paddingRight: '75px'}}>{v}</th>
+  })}  </tr>
+
+<tr>
+  <td># of Columns</td>
+  <td>4</td>
+  <td>8</td>
+  <td>12</td>
+  <td>12</td>
+</tr>
+<tr>
+  <td>Standard Grid Gap</td>
+  <td>12px</td>
+  <td>16px</td>
+  <td>20px</td>
+  <td>28px</td>
+</tr>
+
+</table>
+
+</div>
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>Grid items</h2>
+
+<p>
+  Grid items can be defined quickly setting gridColumn on each nested grid item
+</p>
+<p>Example of centered content within a grid :</p>
+
+```jsx
+<Grid>
+  <div sx={{ gridColumn: '3/11' }}>Grid item</div>
+</Grid>
+```
+
+<p>
+  In the example above, the wrapping Grid defines the grid rows, and inside we
+  can define the gridColumns. In this line - gridColumn: '3/11' - We're defining
+  the div content gridColumns to <b>start at column 3</b> and{' '}
+  <b>end on column 11</b>.
+</p>
+
+<br />
+<p>For example this can be used with multiple grid items:</p>
+
+```jsx
+<Grid>
+  <div sx={{ gridColumn: '1/6' }}>Grid item 1</div>
+  <div sx={{ gridColumn: '6/12' }}>Grid item 2</div>
+</Grid>
+```
+
+<p>
+  In the example above, we're defining the div content gridColumns for Grid item
+  1 to start at column 1 and end on column 6, and Grid item 2 to start at column
+  6 and end at 12.
+</p>
+
+<p>
+  This works the same for functional components, we just need to pass the
+  gridColum into extraSx instead of sx.
+</p>
+
+```jsx
+<Grid>
+  <Flex extraSx={{ gridColumn: '1/6' }}>Grid item 1</Flex>
+</Grid>
+```
+
+<br />
+<p>Example of full width content within a grid :</p>
+
+```jsx
+<Grid>
+  <div sx={{ gridColumn: ['auto / span 4'] }}>Grid item 1</div>
+  <div sx={{ gridColumn: ['auto / span 4'] }}>Grid item 2</div>
+  <div sx={{ gridColumn: ['auto / span 4'] }}>Grid item 3</div>
+</Grid>
+```
+
+<p>
+  <b>**Note**</b> The a gridColumn needs to be wrapped by a Grid in order to
+  work, and the Grid needs to be its direct parent. This can seen below
+</p>
+
+```jsx
+<Grid>
+  <div sx={{ gridColumn: '1/6' }}>
+    This gridColumn will work for the element because its a direct child from
+    Grid
+  </div>
+  <span>
+    <div sx={{ gridColumn: '6/12' }}>
+      This gridColumn will NOT work for the element because its a NOT direct
+      child from Grid
+    </div>
+  </span>
+</Grid>
+```
+
+<br />
+<p>We can add responsiveness to the grid item with responsive array syntax</p>
+
+```jsx
+<Grid>
+  <div sx={{ gridColumn: ['1/5', '2/8', '3/11', '3/11'] }}>
+    This gridColumn will work for the element because its a direct child from
+    Grid
+  </div>
+</Grid>
+```
+
+<br />
+<p>
+  In the example above the gridColumn is being set at each breakpoint in the
+  array. It reads like this:
+</p>
+
+```jsx
+gridColumn: [
+  'value at sm breakpoint',
+  'value at md breakpoint',
+  'value at lg breakpoint',
+  'value at xl breapoint',
+];
+```
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>Changing Grid columns</h2>
+
+<p>
+  If needed, you can change the Grid columns with the totalGridColumns prop when
+  you don't want a full width Grid
+</p>
+
+```jsx
+<Grid totalGridColumns={[3, 3, 6, 6]}>...</Grid>
+
+// Now there are:
+//  6 grid columns xl breakpoint
+//  6 grid columns lg breakpoint
+//  3 grid columns md breakpoint
+//  3 grid columns sm breakpoint
+```

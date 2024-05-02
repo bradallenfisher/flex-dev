@@ -1,0 +1,3 @@
+{
+  "extends": "@psu-flex/tsconfig/base.json"
+}

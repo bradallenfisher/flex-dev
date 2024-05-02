@@ -1,0 +1,107 @@
+<!-- Colors.stories.mdx -->
+
+import { jsx } from 'theme-ui';
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import {
+  theme,
+  converToPixel,
+  spacingInPixels,
+} from '@psu-flex/core-ui';
+
+<Meta title="Tokens/Spacing" />
+
+# Spacing Tokens
+
+<div styles={{ background: '#eeeeee' }}>
+  <div style={{ marginBottom: '2rem', borderBottom: '1px solid gray', marginBottom: '30px'}}>
+    <h3>All available color tokens are listed here. </h3>
+    <p>
+      Each spacing is defined in figma and pushed into the tokens branch
+      <a href="https://github.com/Penn-State-Web-and-Digital/psu-flex/blob/tokens/theme/src/figma/theme.json">
+        {' '}
+        here.
+      </a>
+      These are then exposed by theme.ui and accessible through the sx prop
+      using the names listed below for margin or padding.
+    </p>
+  </div>
+
+  <table>
+  <tr>
+    <th style={{textAlign: 'left', paddingRight: '150px'}}>Key</th>
+    <th style={{textAlign: 'left', paddingRight: '150px'}}>Rem value</th>
+    <th style={{textAlign: 'left', paddingRight: '150px'}}>Px value</th>
+    <th style={{textAlign: 'left', paddingRight: '150px'}}>Example</th>
+    </tr>
+{Object.entries(theme.space).map(([k, v]) => {
+    return (
+      <tr>
+      <td>{k}</td>
+      <td>{v}</td>
+      <td>{spacingInPixels[k]}</td>
+      <td style={{padding: '8px'}}><div style={{width: `${v}`, height: '23.5px', backgroundColor: theme.colors['beaverBlue']}}></div></td>
+      </tr>
+      )
+  })}
+
+</table>
+</div>
+{/*
+  <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+  <div style={{display: 'flex', flexDirection: 'column'}}>
+    <h2 style={{margin: 0, border: 'none'}}>
+      Token Key
+    </h2>
+  {Object.entries(theme.space).map(([k, v]) => {
+return <div style={{display: 'flex', width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px'}}>
+  <h3 style={{margin: 0, paddingTop: '10px', paddingBottom: '10px'}}>{k}</h3>
+  </div>
+})}
+</div>
+  <div style={{display: 'flex', flexDirection: 'column'}}>
+    <h2 style={{margin: 0, border: 'none'}}>
+      Spacing Value
+    </h2>
+{Object.entries(theme.space).map(([k, v]) => {
+return <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px'}}>
+
+  <h3 style={{margin: 0, paddingTop: '10px', paddingBottom: '10px'}}>{v}</h3>
+  </div>
+})}
+</div>
+  <div style={{display: 'flex', flexDirection: 'column'}}>
+    <h2 style={{margin: 0, border: 'none'}}>
+      Example
+    </h2>
+{Object.entries(theme.space).map(([k, v]) => {
+return <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', marginBottom: '10px'}}>
+  <div style={{width: `${v}`, height: '23.5px', paddingTop: '10px', paddingBottom: '10px', backgroundColor: theme.colors['nittanyNavy']}}></div>
+  </div>
+})}
+</div>
+</div> */}
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>
+  Accessing the spacing tokens
+</h2>
+
+<p>
+  **Access any spacing token by using the sx prop and passing in the neccessary
+  token key into margin, padding, scrollMargin, scrollPadding, top, right,
+  bottom, left, gridGap, gridColumnGap, gridRowGap, gap, columnGap, or rowGap.
+  These CSS properties will use values defined in the theme, when available.
+</p>
+
+```jsx
+//for functional component
+<Flex extraSx={{ mx: 5 }}>...</Flex>
+<Flex extraSx={{ p: 2 }}>...</Flex>
+
+//for base html element
+<div sx={{ mx: 4 }}>This div is using margin 4 token</div>
+<div sx={{ mb: 2 }}>This div is using margin 2 token</div>
+<div sx={{ py: 2 }}>This div is using padding 2 token</div>
+...
+```

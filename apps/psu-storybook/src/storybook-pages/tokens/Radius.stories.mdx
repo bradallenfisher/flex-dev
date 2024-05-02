@@ -1,0 +1,59 @@
+<!-- Colors.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme } from '@psu-flex/core-ui';
+import { copyToken } from './sb-doc-theme-functions/copy-token.ts';
+import { SbRadiusComponent } from './sb-doc-theme-functions/sb-doc-radius.jsx';
+
+<Meta title="Tokens/Radius" />
+
+# Radius
+
+<div styles={{ background: '#eeeeee' }}>
+  <div style={{ borderBottom: '1px solid gray', marginBottom: '2rem' }}>
+    <h3>All available radius tokens are listed here. </h3>
+    <p>
+      Each radius token is defined in figma and pushed into the tokens branch
+      <a href="https://github.com/Penn-State-Web-and-Digital/psu-flex/blob/tokens/theme/src/figma/theme.json">
+        {' '}
+        here.
+      </a>
+      These are then exposed by theme.ui and accessible through the sx prop
+      using the names listed below.
+    </p>
+  </div>
+  <p
+    style={{
+      fontWeight: '500',
+      fontSize: '16px',
+      marginBottom: '48px',
+      textAlign: 'center',
+    }}
+  >
+    *Click to copy token*
+  </p>
+</div>
+
+<SbRadiusComponent />
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>
+  Accessing the radius tokens
+</h2>
+
+<p>
+  **Access any radius token by using the sx prop and passing in the neccessary
+  token key into borderRadius, borderTopRightRadius, borderTopLeftRadius,
+  borderBottomRightRadius, borderBottomLeftRadius. These CSS properties will use
+  values defined in the theme, when available.
+</p>
+
+```jsx
+//for functional components
+<Flex extraSx={{borderRadius: 'xs'}}>...</Flex>
+
+//for html elements
+<div sx={{ borderRadius: 'xs' }}>4px Border Radius</div>
+<div sx={{ borderTopRightRadius: 'sm' }}>8px Border Top Right Radius</div>
+<div sx={{ borderBottomLeftRadius: 'md' }}>12px Border Bottom Left Radius</div>
+```

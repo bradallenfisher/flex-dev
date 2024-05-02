@@ -1,0 +1,13 @@
+{
+  "name": "@psu-flex/static-page",
+  "version": "0.0.0",
+  "main": "./src/index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "theme-ui": "^0.16.1"
+  }
+}

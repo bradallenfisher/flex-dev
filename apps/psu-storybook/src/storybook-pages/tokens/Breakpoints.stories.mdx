@@ -1,0 +1,113 @@
+<!-- Colors.stories.mdx -->
+
+import { jsx } from 'theme-ui';
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme } from '@psu-flex/core-ui';
+import { contentContainerMargins } from '@psu-flex/core-ui';
+
+<Meta title="Tokens/Breakpoints" />
+
+<h1>Breakpoints Tokens</h1>
+
+<div styles={{ background: '#eeeeee'}}>
+  <div style={{ marginBottom: '2rem', borderBottom: '1px solid gray', marginBottom: '30px' }}>
+    <h3>All available breakpoint tokens are listed here. </h3>
+    <p>
+      Each break is defined in figma and pushed into the tokens branch
+      <a href="https://github.com/Penn-State-Web-and-Digital/psu-flex/blob/tokens/theme/src/figma/theme.json">
+        {' '}
+        here. {' '}
+      </a>
+    </p>
+  </div>
+
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '40px',
+  }}
+>
+  <table>
+    <tr>
+      <th style={{ textAlign: 'left', paddingRight: '100px' }}>Breakpoints</th>
+      <th style={{ textAlign: 'left', paddingRight: '100px' }}>Max Width</th>
+      <th style={{ textAlign: 'left', paddingRight: '100px' }}>
+        Content Container Inline Margins
+      </th>
+    </tr>
+    <tr>
+      <td>sm</td>
+      <td>360px</td>
+      <td>26px</td>
+    </tr>
+    <tr>
+      <td>md</td>
+      <td>768px</td>
+      <td>40px</td>
+    </tr>
+    <tr>
+      <td>lg</td>
+      <td>1080px</td>
+      <td>46px</td>
+    </tr>
+    <tr>
+      <td>xl</td>
+      <td>1440px</td>
+      <td>62px</td>
+    </tr>
+  </table>
+</div>
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>
+  Accessing the breakpoint tokens
+</h2>
+
+<h4>All breakpoints can be accessed using array syntax inside sx or extraSx</h4>
+
+<p>
+  **Access any breakpoint token by using the sx or extraSx prop. These can then
+  be used in combination with responsive array values and variants. For
+  instance, you can create reusable typographic styles that don't pollute the
+  global CSS scope. Responsive array values work with other CSS properties
+  inside the sx prop as well.
+</p>
+
+```jsx
+//for functional components
+<Flex extraSx={{ backgroundColor: ['link', 'nittanyNavy', 'link', 'white'] }}>...</Flex>
+
+{/* in the above, backgroundColor is:
+'link' at sm breakpoint,
+'nittanyNavy' at md breakpoint,
+'link' at lg breakpoint,
+and 'white' at xl breakpoint */}
+
+
+//for html elements
+<div sx={{fontSize: [4, 7, "13px", "3rem"]}}/>
+<div sx={{width: ["100%", "75%", "400px", "10vw"]}}/>
+...
+```
+
+<p>
+  In the above example, inside the sx prop - each css property value in the
+  property array will correspond to the breakpoint at that index in the
+  breakpoint token array.
+</p>
+
+<p>
+  To be more specific, in the first div - the fontSize will be set to..
+  <ul>
+    <li>4 at the sm breakpoint</li>
+    <li>7 at the md breakpoint</li>
+    <li>13px at the large breakpoint</li>
+    <li>3rem at the xl breakpoint</li>
+  </ul>
+</p>
+<p>These CSS properties will use values defined in the theme, when available just like using CSS properties inside the sx prop withouth the breakpoint array.</p>
+</div>

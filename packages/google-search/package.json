@@ -1,0 +1,26 @@
+{
+  "name": "@psu-flex/google-search",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@internationalized/date": "^3.5.0",
+    "@psu-flex/core-ui": "*",
+    "@psu-flex/platform-theme": "*",
+    "axios": "^1.3.2",
+    "classnames": "2.3.1",
+    "postcss-css-variables": "^0.18.0",
+    "postcss-remove-nested-calc": "^1.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-use-pagination": "^2.0.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.3.2",
+    "theme-ui": "^0.16.1"
+  },
+  "devDependencies": {
+    "@psu-flex/tsconfig": "*",
+    "typescript": "^4.5.2"
+  }
+}

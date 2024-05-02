@@ -1,0 +1,140 @@
+import { Meta } from '@storybook/addon-docs/';
+import { Icon } from '@psu-flex/core-ui';
+
+<Meta title="Extra Info/Sustainable Components" />
+
+<h1>Patterns for building sustainable components</h1>
+<h3>Sizing enums</h3>
+<p>
+  - When making sizing enums use two letter abbreviations for any required size.
+</p>
+
+```jsx
+size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2x' | '3x' | 'etc';
+```
+
+<h3>Interface design </h3>
+<p>
+  Avoid boolean props. This is to help promote scalability and future proof
+  props.
+</p>
+<p>
+  Example: if we define fullWidth: boolean; in our interface, then if we decide
+  to later add more width options besides full width, this prop would break.
+  Instead we can define width: 25% | 50% | 75% | 100%;. This will allow us to
+  add more sizes later but still add full width styling. Avoid passing primitive
+  arguments. Passing in an object allows for more flexibility because order
+  doesnt matter. Also passing a custom type for the interface gives the
+  developer more direction on how to use the component correctly. Example1: in
+  our interface, if we define color: string; there is a good chance the
+  developer will enter the incorrect color or misspell the color key. Instead we
+  define export type Colors = 'beaverBlue' then in our component interface
+  color: Colors; Example2: in our theme, if we define
+</p>
+
+```jsx
+const spacing = ['0px', '4px'];
+```
+
+<p>
+  and use these spaces by referencing the index in this array, adding any more
+  spaces to our array later could cause a break if we dont add the next value to
+  end. A better alternative:
+</p>
+
+```jsx
+const spacing = {
+  0: '0px'
+  1: '4px'
+};
+```
+
+<p>
+  This lets the developer use a key instead of the index which is more stable
+  and scalable.
+</p>
+
+<h3>
+    Naming conventions standards
+</h3>
+<p>Boolean - isVisible, isDisabled, isOpen.
+Callback - onCallback
+Common prop names to use when possible - variant, size, itemData, Items
+
+useVeryDescriptiveNamesForCustomHooks
+Dont repurpose html props. Html prop names should be avoided to avoid confusion and increase specificity.
+Example avoid type, className, sx, onClick, alt, data, name, src, title, etc.
+Let the user decide semantics.
+Example:
+
+</p>
+
+```jsx
+<Typography tag=”h2”>This is now an h2</Typography>
+```
+
+<p>Create custom hooks to avoid repetitive functionality.</p>
+
+```jsx
+import { useState } from 'react';
+
+export const useToggle = (defaultValue) => {
+  const [value, setValue] = useState(defaultValue);
+
+  function toggleValue(value): void {
+    setValue((currentValue) =>
+      typeof value === 'boolean' ? value : !currentValue
+    );
+  }
+
+  return [value, toggleValue];
+};
+```
+
+<p>In functional component:</p>
+
+```jsx
+const [dropdown, setDropdown] = useToggle(false);
+
+<div className="wrapper" onClick={setDropdown}>
+  Toggle dropdown
+</div>;
+```
+
+<h3>Break up components.</h3>
+
+```jsx
+<Table>
+<TableHead/>
+<TableBody>
+<TableRow/>
+<TableRow/>
+<TableBody/>
+</Table>
+```
+
+<h3>Wrap components.</h3>
+
+```jsx
+<SimpleTable data={tableData} />
+<SortableTable data={tableData} />
+```
+
+<p>Add markdown to components to allow an onHover usage description.</p>
+
+```jsx
+/** *
+This will show up when you hover a usage or get it auto-completed.
+
+<br>
+<br>
+<h3>Basic Breadcrumbs</h3>
+Breadcrumbs description
+*/
+export const Breadcrumbs = () => {};
+```
+
+<p>
+This will show up when you hover a usage or get it auto-completed.
+
+</p>

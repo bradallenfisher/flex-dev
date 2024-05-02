@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs/';
+import { Icon } from '@psu-flex/core-ui';
+
+<Meta title="Style Guide/Using extrasx & sx" />
+
+<h1>extrasx or sx? Which to use?</h1>
+<br/>
+<br/>
+<br/>
+
+<h3>sx prop</h3>
+
+<p>
+ <b>Only use sx prop on native html.</b> This is a theme aware prop that can pass styling to your jsx.
+
+</p>
+
+```jsx
+<div sx={{ p: 4 }}>
+  {...}
+</div>
+```
+<p>
+ In this example we're adding padding to our div using sx
+</p>
+
+
+<br/>
+<br/>
+<h3>extrasx prop</h3>
+
+<p>
+ <b>Only use extrasx prop on functional components.</b> extrasx is used to
+  append styles to a nested child. This gives the component more flexibility to
+  fit more uses. The extraSx prop is theme aware just like the sx prop. The difference is that extraSx allows us to appends styling to a child's already existing sx prop.
+
+</p>
+
+```jsx
+<Body extraSx={{ m: 4 }} variant={18}>
+  {body}
+</Body>
+
+//or
+
+<Link variant={20} extraSx={{ fontWeight: '400' }}>
+{link.text}
+</Link>
+
+//the above example overrides the Link variant's default font weight of 700 with 400
+```

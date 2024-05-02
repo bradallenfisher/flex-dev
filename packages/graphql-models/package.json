@@ -1,0 +1,11 @@
+{
+  "name": "@psu-flex/graphql-models",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "@psu-flex/tsconfig": "*",
+    "typescript": "^4.5.2"
+  }
+}

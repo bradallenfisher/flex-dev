@@ -1,0 +1,38 @@
+name: Version and Changelog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  version_and_changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Git
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Get latest tag
+        id: latest_tag
+        run: echo "::set-output name=TAG::$(git describe --tags --abbrev=0)"
+
+      - name: Run auto-changelog and increment version
+        run: |
+          tag=$(echo ${{ steps.latest_tag.outputs.TAG }})
+          yarn version --no-git-tag-version --new-version "$tag"
+          yarn write-changelog
+
+      - name: Push changes
+        run: |
+          git add .
+          git commit -m "Update changelog and version"
+          git push

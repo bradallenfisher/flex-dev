@@ -1,0 +1,31 @@
+.tr-td-styles {
+  border: 1px solid #e4e5e7;
+  color: #262626;
+  margin: 0;
+  padding: 6px 13px;
+  font-size: 14px;
+}
+
+.tr-styles {
+  border-top: 1px solid #e4e5e7;
+  margin: 0;
+}
+
+.tr-th-styles {
+  color: #262626;
+  border: 1px solid #e4e5e7;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+.tr-styles:nth-of-type(2n) {
+  background-color: #f8f8f8;
+}
+
+.table-styles {
+  border-collapse: collapse;
+}
+
+.th-styles {
+  font-size: 14px;
+}

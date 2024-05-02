@@ -1,0 +1,35 @@
+<!-- HooksGuide.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme } from '@psu-flex/core-ui';
+
+<Meta title="Utility/Functions/Functions Guide" />
+
+# Utility Functions
+
+<div style={{ borderBottom: '1px solid gray', marginBottom: '2rem' }} />
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>mergeSx Function</h2>
+
+<p>Use the mergeSx if you need to merge multiple styles into one variable</p>
+
+```jsx
+import { mergeSx } from '..';
+
+const YourComponent = () => {
+  const baseSx = {
+    color: 'nittanyNavy',
+  };
+  const borderSx = {
+    borderWidth: 'xs',
+  };
+  const hoverSx = {
+    '&:hover': { backgroundColor: 'linkLight' },
+  };
+
+  const componentSx = mergeSx(baseSx, borderSx, hoverSx);
+
+  return <div sx={{ ...componentSx }}>...</div>;
+};
+```

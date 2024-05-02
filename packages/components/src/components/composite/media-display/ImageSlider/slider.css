@@ -1,0 +1,129 @@
+/* adding this custom css file to overwrite styles from slick in order to match gallery design */
+
+.slick-container {
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+@media (max-width: 767.9px) {
+  .slick-slide img {
+    height: 200px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1079.9px) {
+  .slick-slide img {
+    height: 300px;
+  }
+}
+@media (min-width: 1080px) and (max-width: 1439.9px) {
+  .slick-slide img {
+    height: 360px;
+  }
+}
+@media (min-width: 1440px) {
+  .slick-slide img {
+    height: 480px;
+  }
+}
+
+.slick-dots {
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: #001e44;
+}
+
+.slick-dots li button:before {
+  color: #ccdae6;
+  opacity: 1;
+}
+
+@media (max-width: 360px) {
+  .slick-dots {
+    margin-bottom: -13px;
+  }
+}
+@media (min-width: 361px) and (max-width: 767px) {
+  .slick-dots {
+    margin-bottom: -17px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1079.9px) {
+  .slick-dots {
+    margin-bottom: -21px;
+  }
+}
+@media (min-width: 1080px) {
+  .slick-dots {
+    margin-bottom: -21px;
+  }
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.slick-dots li {
+  width: 24px;
+  height: 24px;
+  margin: 0px;
+}
+
+.slick-dots li button {
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+}
+
+.slick-slide {
+  float: left;
+  min-height: 1px;
+}
+
+.slick-prev::before {
+  content: none !important;
+}
+
+.slick-next::before {
+  content: none !important;
+}
+
+.slick-prev {
+  width: unset;
+  left: 5%;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  .slick-prev {
+    display: none !important;
+  }
+}
+
+.slick-next {
+  width: unset;
+  z-index: 100;
+  right: 5%;
+}
+
+@media (max-width: 768px) {
+  .slick-next {
+    display: none !important;
+  }
+}
+
+.slick-track {
+  transition: all 0s !important;
+  position: relative;
+  top: 0;
+  height: 100%;
+  left: 0;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}

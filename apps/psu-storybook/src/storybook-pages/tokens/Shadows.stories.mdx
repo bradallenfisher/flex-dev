@@ -1,0 +1,56 @@
+<!-- Colors.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme } from '@psu-flex/core-ui';
+import { copyToken } from './sb-doc-theme-functions/copy-token.ts';
+import { SbShadowsComponent } from './sb-doc-theme-functions/sb-doc-shadows.jsx';
+
+<Meta title="Tokens/Shadows" />
+
+# Shadows
+
+<div styles={{ background: '#eeeeee' }}>
+  <div style={{ borderBottom: '1px solid gray', marginBottom: '2rem' }}>
+    <h3>All available shadow tokens are listed here. </h3>
+    <p>
+      Each shadow token is defined in figma and pushed into the tokens branch
+      <a href="https://github.com/Penn-State-Web-and-Digital/psu-flex/blob/tokens/theme/src/figma/theme.json">
+        {' '}
+        here.
+      </a>
+      These are then exposed by theme.ui and accessible through the sx prop
+      using the names listed below.
+    </p>
+  </div>
+  <p
+    style={{
+      fontWeight: '500',
+      fontSize: '16px',
+      marginBottom: '48px',
+      textAlign: 'center',
+    }}
+  >
+    *Click to copy token*
+  </p>
+  <SbShadowsComponent />
+</div>
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>
+  Accessing the shadow tokens
+</h2>
+
+<p>
+  **Access any shadow token by using the sx prop and passing in the neccessary
+  token key into boxShadow or textShadow. These CSS properties will use values
+  defined in the theme, when available.
+</p>
+
+```jsx
+//for functional components
+<Flex extraSx={{ boxShadow: 'md-2' }}>...</Flex>
+
+//for html elements
+<div sx={{ boxShadow: 'md-1' }}>Box Shadow</div>
+<h1 sx={{ textShadow: 'sm-1' }}>Text shadow</h1>
+```

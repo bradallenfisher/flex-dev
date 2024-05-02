@@ -1,0 +1,169 @@
+@import './GoogleSearchProvider/sass-files/breakpoints';
+@import './GoogleSearchProvider/sass-files/colors';
+
+.searchWrapper {
+  a {
+    background-color: transparent;
+  }
+  :global {
+    div.gs-title > a.gs-title {
+      font-size: 1.375rem !important;
+      font-weight: 700;
+      letter-spacing: 0.015rem;
+      line-height: 1.75rem;
+      color: #005fa9 !important;
+      font-family: Roboto, 'Franklin Gothic Medium', Arial, Tahoma, sans-serif;
+
+      &:hover {
+        text-decoration: underline !important;
+      }
+
+      > b {
+        font-size: 1.375rem !important;
+        letter-spacing: 0.015rem !important;
+        line-height: 1.75rem;
+        color: $color-pa-link !important;
+      }
+
+      @include breakpoint($bp-tablet) {
+        font-size: 1.5rem !important;
+        letter-spacing: normal !important;
+        > b {
+          font-size: 1.5rem !important;
+          letter-spacing: normal !important;
+        }
+      }
+
+      @include breakpoint($bp-desktop) {
+        font-size: 1.875rem !important;
+        line-height: 2.35rem !important;
+        > b {
+          font-size: 1.875rem !important;
+          line-height: 2.35rem !important;
+        }
+      }
+    }
+
+    .gsc-tabsArea {
+      border-bottom: none !important;
+
+      .gsc-tabHeader {
+        background-color: transparent;
+        color: #333;
+
+        &.gsc-tabhActive {
+          border-bottom: 2px solid #333;
+        }
+
+        &.gsc-tabhInactive {
+          color: #444;
+        }
+      }
+    }
+
+    .gsc-above-wrapper-area {
+      border-bottom: none !important;
+    }
+
+    .gsc-input-box {
+      border-radius: 20px;
+    }
+
+    .gs-bidi-start-align.gs-visibleUrl {
+      color: #005fa9 !important;
+      font-size: 1.125rem !important;
+      font-family: Roboto, 'Franklin Gothic Medium', Arial, Tahoma, sans-serif;
+      padding-top: 0.45rem;
+      font-weight: 400;
+      line-height: 1.5rem;
+      @media screen and (max-width: 767px) {
+        font-size: 1rem !important;
+      }
+      @media screen and (min-width: 768px) and (max-width: 1079.9px) {
+        font-size: 1.063rem !important;
+      }
+    }
+
+    .gs-bidi-start-align.gs-snippet {
+      padding-top: 0.75rem;
+      font-size: 1.0625rem;
+      line-height: 1.375rem;
+      letter-spacing: -0.005rem;
+      color: #162037;
+
+      @include breakpoint($bp-tablet) {
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+      }
+
+      @include breakpoint($bp-desktop) {
+        margin-bottom: 5px;
+        font-size: 1.25rem;
+        line-height: 1.6875rem;
+        letter-spacing: normal;
+      }
+    }
+
+    .gsc-results .gsc-imageResult {
+      margin-bottom: 1.3rem;
+      margin-top: 1.7rem;
+    }
+
+    .gs-image[alt='Thumbnail image'] {
+      display: none;
+
+      @include breakpoint($bp-desktop) {
+        display: block !important;
+        float: left !important;
+        margin-right: 20px;
+        margin-top: 17px;
+        max-width: 203px !important;
+        max-height: 146px !important;
+      }
+    }
+
+    .gsc-webResult.gsc-url-top {
+      display: none !important;
+    }
+
+    .gs-web-image-box.gs-image {
+      max-width: 203px !important;
+      max-height: 146px !important;
+    }
+
+    .gs-result .gs-image {
+      border: none !important;
+    }
+
+    .gs-web-image-box {
+      float: none !important;
+    }
+
+    .gsc-control-cse {
+      padding: 0em !important;
+    }
+
+    .gsc-webResult.gsc-result {
+      border: none !important;
+      padding: 1.75rem 4px !important;
+      clear: both;
+
+      @include breakpoint($bp-desktop) {
+        padding: 2.75rem 4px !important;
+      }
+
+      &:first-child {
+        margin-top: 20px !important;
+      }
+    }
+
+    .gsc-results .gsc-cursor {
+      .gsc-cursor-page {
+        background-color: initial;
+        color: #314d64;
+        font-size: 20px;
+        margin-right: 1.25rem !important;
+      }
+    }
+  }
+}

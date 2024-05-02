@@ -1,0 +1,15 @@
+//=======================================================
+// Variables
+//=======================================================
+// z-index
+$zi-highest: 50;
+$zi-high: 40;
+$zi-medium: 30;
+$zi-low: 20;
+$zi-lowest: 10;
+$zi-above-ground: 1;
+$zi-ground: 0;
+$zi-below-ground: -1;
+// AddThis social sharing widgets have a z-index of 100020.
+// A higher z-index was needed for the image-modal component.
+$zi-higher-than-add-this-widgets: 100021;

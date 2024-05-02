@@ -1,0 +1,19 @@
+import React from 'react';
+import { jsx, ThemeProvider, {{pascalCase name}}, {{pascalCase name}}Props } from '@psu-flex/psu-global-ui';
+import { Meta, Story } from '@storybook/react';
+
+export default {
+  title: 'Global/{{pascalCase name}}',
+  component: {{pascalCase name}},
+} as Meta;
+
+const Template: Story<{{pascalCase name}}Props> = (args) => (
+  <ThemeProvider>
+    <{{pascalCase name}} {...args}>
+      {{pascalCase name}} story
+    </{{pascalCase name}}>
+  </ThemeProvider>
+);
+
+export const Default = Template.bind({});
+Default.args = {};

@@ -1,0 +1,15 @@
+{
+  "name": "@psu-flex/core-ui",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@psu-flex/components": "*",
+    "@psu-flex/platform-theme": "*",
+    "theme-ui": "^0.16.1"
+  },
+  "devDependencies": {
+    "@psu-flex/tsconfig": "*",
+    "typescript": "^4.5.2"
+  }
+}

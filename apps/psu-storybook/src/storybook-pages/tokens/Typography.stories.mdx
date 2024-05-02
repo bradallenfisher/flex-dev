@@ -1,0 +1,190 @@
+<!-- Typography.stories.mdx -->
+
+import { theme } from '@psu-flex/core-ui';
+import { Meta, Typeset } from '@storybook/addon-docs';
+import { SbTypographyComponent } from './sb-doc-theme-functions/sb-doc-typography.jsx';
+
+<Meta title="Tokens/Typography" />
+
+export const fontSizes = theme.fontSizes;
+
+<div style={{ marginBottom: '2rem', marginBottom: '30px'}}>
+<h1 >Typography</h1>
+
+<p sx={{ color: 'link' }}>
+  Typography variants automatically include responsive values for fontSize,
+  lineHeight, letterSpacing, and fontFamily.
+  <br />
+  Using variants is <b>always</b> recommended.
+</p>
+
+<h4>Example:</h4>
+
+```jsx
+// variant={20} includes fontFamily, fontWeight, letterSpacing, lineHeight values at each breakpoint
+<Body variant={20}>Body</Body>
+```
+
+</div>
+
+<h2>How to tell which variant to use?</h2>
+
+<p>
+  Variant key name corresponds with the Typography font size at the desktop
+  size. This is true for all typography components (Body, Heading, DisplayHeading)
+
+<br />
+
+So if the design has a font size for a Heading of 32px at the desktop screen size, then the correct variant is 32
+
+</p>
+
+```jsx
+// for DisplayHeading with 64px fontSize at desktop
+<DisplayHeading variant={64}>Responsive 64 variant for DisplayHeading</DisplayHeading>
+
+// for Heading with 32px fontSize at desktop
+<Heading variant={32}>Responsive 32 variant for Heading</Heading>
+
+// for Heading with 20px fontSize at desktop
+<Body variant={20}>Responsive 20 variant for Body</Body>
+
+
+```
+
+<h2>Available variants for each component</h2>
+
+<p>
+  Use the corresponding key that matches the desktop fontSize in the design.
+</p>
+<br />
+<SbTypographyComponent />
+
+<h2>Typography Tags</h2>
+
+<p>
+There is a default tag for each functional typography component (Body, Heading, DisplayHeading)
+<br />
+
+If needed this can be overwritten with the tag prop.
+
+</p>
+
+```jsx
+<DisplayHeading tag="h2">h2 DisplayHeading</DisplayHeading>
+<Heading tag="h3">h3 Heading</Heading>
+```
+
+<h2>Overwriting properties</h2>
+
+<p>
+  If possible, its <b>always</b> recommended to use variants, however when the
+  design has a slight difference from the variant, you can use extraSx to pass
+  in the needed token.
+</p>
+
+```jsx
+// overwrite default variant fontWeight of bold on the Heading to the medium token
+<Heading variant={32} extraSx={{ fontWeight: 'medium' }}>
+  Medium fontWeight Heading
+</Heading>
+
+// overwrite default variant lineHeight to 120 token
+<Heading variant={32} extraSx={{ lineHeight: '120' }}>
+  120% lineHeight Heading
+</Heading>
+```
+
+<h2>Font Weights</h2>
+
+<p>If needed, use the corresponding key to access the required fontWeight.</p>
+
+<div style={{ display: 'flex', flexDirection: 'row',}}>
+  <table>
+    <tc></tc>
+  <tr >
+    <th style={{textAlign: 'left', paddingRight: '100px'}}>Key</th>
+ <th style={{textAlign: 'left'}}>Value</th>
+ <th style={{textAlign: 'left', paddingRight: '100px'}}>Example</th>
+ </tr>
+{Object.entries(theme.fontWeights).map(([k, v]) => {
+    return(
+      <tr>
+      <td>{k}</td>
+      <td >{v}</td>
+      <td style={{fontWeight: v}}>PSU-Flex</td>
+      </tr>
+      )
+})}
+
+</table>
+</div>
+
+```jsx
+<Heading extraSx={{ fontWeight: 'medium' }} variant={32}>
+  medium fontWeight
+</Heading>
+```
+
+<h2>Font Families</h2>
+
+<p>If needed, use the corresponding key to access the required fontFamily.</p>
+
+<div style={{ display: 'flex', flexDirection: 'row',}}>
+  <table>
+    <tc></tc>
+  <tr >
+    <th style={{textAlign: 'left', paddingRight: '100px'}}>Key</th>
+ <th style={{textAlign: 'left'}}>Value</th>
+ <th style={{textAlign: 'left', paddingRight: '100px'}}>Example</th>
+ </tr>
+{Object.entries(theme.fonts).map(([k, v]) => {
+    return(
+      <tr>
+      <td>{k}</td>
+      <td >{v}</td>
+      <td style={{fontFamily: v}}>PSU-Flex</td>
+      </tr>
+      )
+})}
+
+</table>
+</div>
+
+```jsx
+<Heading extraSx={{ fontFamily: 'condensed' }} variant={32}>
+  condensed fontFamily
+</Heading>
+```
+
+<h2>Line Heights</h2>
+
+<p>If needed, use the corresponding key to access the required lineHeight.</p>
+
+<div style={{ display: 'flex', flexDirection: 'row',}}>
+  <table>
+    <tc></tc>
+  <tr >
+    <th style={{textAlign: 'left', paddingRight: '100px'}}>Key</th>
+ <th style={{textAlign: 'left'}}>Value</th>
+ <th style={{textAlign: 'left', paddingRight: '100px'}}>Example</th>
+ </tr>
+{Object.entries(theme.lineHeights).slice(0, 3).map(([k, v]) => {
+    return(
+      <tr>
+      <td>{k}</td>
+      <td >{v}</td>
+      <td style={{lineHeight: v, width: '250px'}}>So, I came across your post because I was facing the same issue,
+              but I've found a solution.</td>
+      </tr>
+      )
+})}
+
+</table>
+</div>
+
+```jsx
+<Heading extraSx={{ lineHeight: '120' }} variant={32}>
+  120 lineHeight
+</Heading>
+```

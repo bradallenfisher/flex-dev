@@ -1,0 +1,86 @@
+// @import 'src/styles/global/utils/init';
+@import './sass-files/breakpoints';
+@import './sass-files/typography';
+
+// NOTE: Styles diverge from our component patterns for the search page.
+// We do this to match the PSU WWW version of search, which uses Google
+// custom search.
+.search {
+  padding: 4rem 0 2.25rem;
+
+  @include breakpoint($bp-desktop) {
+    padding-top: 3rem;
+  }
+
+  @include breakpoint($bp-desktop) {
+    padding-top: 3.375rem;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding-bottom: 45px;
+  max-width: 1440px;
+
+  @include breakpoint($bp-tablet) {
+    padding-bottom: 55px;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template: 'copy' auto / 1fr;
+  grid-gap: 1.5vw;
+  margin: 0 36px;
+
+  @include breakpoint($bp-tablet) {
+    grid-template: '. copy .' auto / 1fr 6fr 1fr;
+    margin: 0 40px;
+  }
+
+  @include breakpoint($bp-desktop) {
+    grid-template: '. copy .' auto / 1fr 4fr 1fr;
+    margin: 0 52px;
+  }
+
+  @include breakpoint($bp-desktop-lg) {
+    margin: 0 60px;
+  }
+}
+
+.gridArea {
+  grid-area: copy;
+  align-self: end;
+}
+
+.title {
+  @include title-xxlarge;
+  color: var(--color-beaver-blue);
+  margin: 0;
+  padding: 1rem 0 0;
+  font-weight: 700;
+
+  @include breakpoint($bp-desktop) {
+    font-size: 4.375rem;
+    line-height: 4.5rem;
+    letter-spacing: 0.005rem;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 68px;
+    margin: 1.75rem 0 1rem;
+    background-color: #009cde;
+
+    @include breakpoint($bp-tablet) {
+      width: 84px;
+    }
+
+    @include breakpoint($bp-desktop) {
+      margin: 3.5rem 0 2rem;
+      height: 5px;
+    }
+  }
+}

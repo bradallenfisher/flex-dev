@@ -1,0 +1,27 @@
+{
+  "name": "@psu-flex/monorepo",
+  "version": "1.0.2",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "clean-modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' ';'",
+    "version": "auto-changelog --sort-commits [date] && git add CHANGELOG.md",
+    "write-changelog": "node ./docs/write-changelog.js",
+    "docs-dev": "open docs/index.html"
+  },
+  "devDependencies": {
+    "@psu-flex/tsconfig": "*",
+    "turbo": "latest"
+  },
+  "dependencies": {
+    "auto-changelog": "^2.4.0",
+    "showdown": "^2.1.0"
+  },
+  "packageManager": "yarn@1.22.19",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

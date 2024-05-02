@@ -1,0 +1,19 @@
+{
+  "extends": "@psu-flex/tsconfig/react-library.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "isolatedModules": false,
+    "jsx": "preserve",
+    "jsxImportSource": "theme-ui",
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
+}

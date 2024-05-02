@@ -1,0 +1,13 @@
+{
+  "name": "@psu-flex/platform-theme",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@psu-flex/icon-library": "*"
+  },
+  "devDependencies": {
+    "@psu-flex/tsconfig": "*",
+    "typescript": "^4.5.2"
+  }
+}

@@ -1,0 +1,15 @@
+@import 'breakpoints';
+@import 'typography';
+@import 'colors';
+@import 'variables';
+@import 'mixins';
+@import 'grid';
+
+// CSS Variables
+// Put all variables here to prevent importing duplication.
+
+
+.ReactModal__Body--open {
+  //sass-lint:disable-line class-name-format
+  overflow: hidden;
+}

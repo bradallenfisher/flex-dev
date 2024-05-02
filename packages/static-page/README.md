@@ -1,0 +1,1 @@
+# @psu-flex/static-page

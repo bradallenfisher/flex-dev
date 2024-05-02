@@ -1,0 +1,15 @@
+{
+  "extends": "@psu-flex/tsconfig/react-library.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "baseUrl": "./src"
+  },
+  "include": [
+    "**/*.ts",
+  ],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
+}

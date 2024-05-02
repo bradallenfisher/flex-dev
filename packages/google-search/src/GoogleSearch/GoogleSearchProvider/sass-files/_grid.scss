@@ -1,0 +1,268 @@
+@use "sass:math";
+
+// To support IE11, we must use a polyfill that adds only partial
+// support for CSS Custom Properties (CSS variables). We can only
+// set them on :root, and we cannot set a variable that calculates
+// other CSS variables.
+//
+// Therefore, we must do all calculations on SCSS variables, and
+// only assign them to a CSS variable at the last minute. The
+// functions in this file, as well as a couple in _mixins.scss,
+// facilitate these calculations.
+//
+// If the site ever drops support for IE11, this can all be massively
+// simplified into a few CSS variables set directly within media
+// queries with no SCSS involved.
+
+// This function returns the width of a single grid column
+// at the breakpoint you provide it.
+@function one-column($breakpoint) {
+  // See _mixins.scss for an explanation of the
+  // `get-responsive-value` function.
+  $cw: get-responsive-value($content-width, $breakpoint);
+  $cs: get-responsive-value($column-spacing, $breakpoint);
+  $tc: get-responsive-value($total-columns, $breakpoint);
+
+  // Take the content area width, subtract the gaps between
+  // the columns, and divide what's left by the total number
+  // of columns.
+  @return calc((#{$cw} - (#{$cs} * (#{$tc} - 1))) / #{$tc});
+}
+
+// Get the width of a certain number of columns and gutters as
+// an absolute value for use in layouts that don't actually
+// use `display: grid`.
+@function grid-cols-width($breakpoint, $cols, $gutters: $cols - 1) {
+  @return calc((#{one-column($breakpoint)} * #{$cols}) + (#{get-responsive-value($column-spacing, $breakpoint)} * #{$gutters}));
+}
+
+$content-max-width: 1316px;
+
+// These variables are SCSS *maps*, which are like PHP's associative
+// arrays or JSON objects. The keys must be pixel widths, and should
+// almost always be breakpoint variables, though they don't have to
+// be.
+
+// Gap between content area and edge of viewport.
+$container-margin: (
+  $bp-mobile: 10vw,
+  $bp-tablet: math.div(math.div($bp-desktop-lg - $content-max-width, $bp-desktop-lg), 2) * 100 * 1vw,
+  $bp-desktop-lg: calc((100vw - #{$content-max-width}) / 2)
+);
+
+// Number of columns in the full grid layout.
+$total-columns: (
+  $bp-mobile: 4,
+  $bp-tablet: 8,
+  $bp-desktop: 12,
+);
+
+// Gap between grid columns.
+$column-spacing: (
+  $bp-mobile: 3vw,
+  $bp-tablet: 2vw,
+);
+
+// Content area width.
+$content-width: (
+  $bp-mobile: calc(100vw - (#{get-responsive-value($container-margin, $bp-mobile)} * 2)),
+  $bp-tablet: calc(100vw - (#{get-responsive-value($container-margin, $bp-tablet)} * 2)),
+  $bp-desktop: calc(100vw - (#{get-responsive-value($container-margin, $bp-desktop)} * 2)),
+  $bp-desktop-lg: $content-max-width,
+);
+
+// Width of a single slide in the ArticleGallery component.
+$article-gallery-slide-width: (
+  $bp-mobile: #{grid-cols-width($bp-mobile, 4, 4)},
+  $bp-tablet: #{grid-cols-width($bp-tablet, 4, 4)},
+  $bp-desktop: #{grid-cols-width($bp-desktop, 6, 6)},
+  $bp-desktop-lg: #{grid-cols-width($bp-desktop-lg, 6, 6)},
+);
+
+// Width of ArticleGallery images, which are one gutter-width
+// narrower than the slides that contain them.
+$article-gallery-image-width: (
+  $bp-mobile: #{grid-cols-width($bp-mobile, 4)},
+  $bp-tablet: #{grid-cols-width($bp-tablet, 4)},
+  $bp-desktop: #{grid-cols-width($bp-desktop, 6)},
+  $bp-desktop-lg: #{grid-cols-width($bp-desktop-lg, 6)},
+);
+
+// Exactly what it says on the tin. Necessary for padding
+// the slider to perfectly center the current slide.
+$article-gallery-full-width-minus-current-slide-and-gutters: (
+  $bp-mobile: calc(100vw - #{grid-cols-width($bp-mobile, 4, 5)}),
+  $bp-tablet: calc(100vw - #{grid-cols-width($bp-tablet, 4, 5)}),
+  $bp-desktop: calc(100vw - #{grid-cols-width($bp-desktop, 6, 7)}),
+  $bp-desktop-lg: calc(100vw - #{grid-cols-width($bp-desktop-lg, 6, 7)}),
+);
+
+// NewsFeedMany is another carousel with a different design, so
+// it needs similar variables to ArticleGallery.
+$news-feed-many-image-width: (
+  $bp-mobile: #{grid-cols-width($bp-mobile, 3)},
+  $bp-tablet: #{grid-cols-width($bp-tablet, 3)},
+  $bp-desktop: #{grid-cols-width($bp-desktop, 3)},
+  $bp-desktop-lg: #{grid-cols-width($bp-desktop-lg, 3)},
+);
+
+$news-feed-many-slide-width: (
+  $bp-mobile: #{grid-cols-width($bp-mobile, 3, 3)},
+  $bp-small: #{grid-cols-width($bp-small, 3, 3)},
+  $bp-tablet: #{grid-cols-width($bp-tablet, 3, 2)},
+  $bp-desktop: #{grid-cols-width($bp-desktop, 1, 4)},
+  $bp-desktop-lg: #{grid-cols-width($bp-desktop-lg, 1, 4)},
+);
+
+// This mixin outputs all grid-related variables for a given
+// breakpoint. Used on :root in media queries in _init.scss *only*.
+@mixin grid-dimensions($bp: $bp-mobile) {
+  --content-max-width: #{$content-max-width};
+  --container-margin: #{get-responsive-value($container-margin, $bp)};
+  --content-width: #{get-responsive-value($content-width, $bp)};
+  --column-spacing: #{get-responsive-value($column-spacing, $bp)};
+  --total-columns: #{get-responsive-value($total-columns, $bp)};
+
+  --one-column: #{one-column($bp)};
+  --one-gutter: #{grid-cols-width($bp, 0, 1)};
+  --half-gutter: calc(#{grid-cols-width($bp, 0, 1)} / 2);
+
+  --article-gallery-slide-width: #{get-responsive-value($article-gallery-slide-width, $bp)};
+  --article-gallery-image-width: #{get-responsive-value($article-gallery-image-width, $bp)};
+  --article-gallery-half-slide: calc(#{get-responsive-value($article-gallery-slide-width, $bp)} / 2);
+  --article-gallery-slider-padding-x: calc((100vw - #{get-responsive-value($article-gallery-slide-width, $bp)}) / 2);
+  --article-gallery-full-width-minus-current-slide-and-gutters: #{get-responsive-value($article-gallery-full-width-minus-current-slide-and-gutters, $bp)};
+  --article-gallery-button-inset: calc(#{get-responsive-value($article-gallery-full-width-minus-current-slide-and-gutters, $bp)} / 2 / 2);
+
+  --news-feed-many-image-width: #{get-responsive-value($news-feed-many-image-width, $bp)};
+  --news-feed-many-slide-width: #{get-responsive-value($news-feed-many-slide-width, $bp)};
+  --news-feed-many-half-slide: calc(#{get-responsive-value($news-feed-many-slide-width, $bp)} / 2);
+  --news-feed-many-half-image-height: calc(#{get-responsive-value($news-feed-many-image-width, $bp)} * 0.75 / 2);
+}
+
+// With all that out of the way, we can use the CSS variables
+// as normal, since the polyfill *does* support media queries
+// so long as they're set how we've set them in _init.
+
+// Put on any element to constrain it to the content area.
+@mixin container {
+  max-width: var(--content-max-width);
+  margin-left: var(--container-margin);
+  margin-right: var(--container-margin);
+
+  @include breakpoint($bp-desktop-lg) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@mixin full-width {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+// This mixin is deprecated for integration. To employ CSS grid in IE11,
+// we need to define columns per breakpoint. Use the mixins below
+// `full-grid` as needed.
+@mixin full-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--total-columns), 1fr);
+  grid-column-gap: var(--column-spacing);
+}
+
+// Set up `display: grid` for an element that spans the entire grid layout.
+@mixin full-grid-mobile {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: var(--column-spacing);
+}
+
+@mixin full-grid-tablet {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-column-gap: var(--column-spacing);
+}
+
+@mixin full-grid-desktop {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: var(--column-spacing);
+}
+
+// Set up `display: grid` for an element that is smaller than the entire
+// grid layout.
+@mixin sub-grid($cols) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  /* autoprefixer: ignore next */
+  grid-column-gap: var(--column-spacing);
+}
+
+// Set the number of columns at every breakpoint for a
+// CSS grid item.
+@mixin grid-cols(
+  $cols-mobile,
+  $cols-tablet,
+  $cols-desktop,
+  $cols-desktop-lg: $cols-desktop
+) {
+  grid-column-end: span $cols-mobile;
+
+  @include breakpoint($bp-tablet) {
+    grid-column-end: span $cols-tablet;
+  }
+
+  @include breakpoint($bp-desktop) {
+    grid-column-end: span $cols-desktop;
+  }
+
+  @include breakpoint($bp-desktop-lg) {
+    grid-column-end: span $cols-desktop-lg;
+  }
+}
+
+// Set the starting grid line at every breakpoint for a CSS
+// grid item.
+@mixin grid-column-start(
+  $start-mobile,
+  $start-tablet,
+  $start-desktop,
+  $start-desktop-lg: $start-desktop
+) {
+  grid-column-start: $start-mobile;
+
+  @include breakpoint($bp-tablet) {
+    grid-column-start: $start-tablet;
+  }
+
+  @include breakpoint($bp-desktop) {
+    grid-column-start: $start-desktop;
+  }
+
+  @include breakpoint($bp-desktop-lg) {
+    grid-column-start: $start-desktop-lg;
+  }
+}
+
+// Set the number of columns at every breakpoint for an element
+// that is not a true CSS grid item.
+@mixin faux-grid-cols(
+  $cols-mobile,
+  $cols-tablet,
+  $cols-desktop,
+  $cols-desktop-lg: $cols-desktop
+) {
+  width: #{grid-cols-width($bp-mobile, $cols-mobile)};
+
+  @include breakpoint($bp-tablet) {
+    width: #{grid-cols-width($bp-tablet, $cols-tablet)};
+  }
+
+  @include breakpoint($bp-desktop) {
+    width: #{grid-cols-width($bp-desktop, $cols-desktop)};
+  }
+
+  @include breakpoint($bp-desktop-lg) {
+    width: #{grid-cols-width($bp-desktop-lg,$cols-desktop-lg)};
+  }
+}

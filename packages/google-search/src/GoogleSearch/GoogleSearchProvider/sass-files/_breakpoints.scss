@@ -1,0 +1,27 @@
+//===========================
+// Breakpoints
+//===========================
+$bp-mobile: 0px; // Used for responsive SCSS variables.
+$bp-small-dwn: 'max-width: 479px';
+$bp-small: 480px;
+$bp-tablet-dwn: 'max-width: 767px';
+$bp-tablet: 768px;
+$bp-desktop-dwn: 'max-width: 1079px';
+$bp-desktop: 1080px;
+$bp-desktop-lg-dwn: 'max-width: 1439px';
+$bp-desktop-lg: 1440px;
+
+// Expects $viewport to either be a number: 200px
+// Or a string: 'max-width: 300px'
+@mixin breakpoint($viewport) {
+  @if type-of($viewport) == number {
+    @media screen and (min-width: $viewport) {
+      @content;
+    }
+  }
+  @else {
+    @media screen and ($viewport)  {
+      @content;
+    }
+  }
+}

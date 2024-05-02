@@ -1,0 +1,88 @@
+name: PSU Global Cypress Tests
+env:
+  WORKSPACE_ID: psu-global
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - "apps/psu-storybook/**"
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - "apps/psu-storybook/**"
+
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    # To use Remote Caching, uncomment the next lines and follow the steps below.
+    # env:
+    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    #  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Set workspace path
+        id: workspace-path
+        continue-on-error: false
+        run: |
+          WORKSPACE_PATH=$(yarn workspaces -s info | jq -r '."'$WORKSPACE_ID'".location')
+          echo "$WORKSPACE_PATH"
+          echo "dir=$WORKSPACE_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: |
+          echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
+          echo "version=$(yarn -v)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        id: cache-yarn
+        with:
+          path: |
+            ~/.cache/Cypress
+            **/node_modules
+            ${{ steps.workspace-path.outputs.dir }}/.next/cache/
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ steps.yarn-cache-dir-path.outputs.version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+
+      - if: ${{ steps.cache-yarn.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn list
+
+      - name: Install Vercel CLI
+        run: yarn global add vercel@latest
+
+      - name: Pull evironment variables from Vercel
+        run: vercel --token=${{ secrets.VERCEL_TOKEN }} env pull --environment=preview .env.local
+        working-directory: ${{ steps.workspace-path.outputs.dir }}
+
+      - name: Run Cypress end-to-end tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          build: yarn workspace ${{ env.WORKSPACE_ID }} build
+          start: yarn workspace ${{ env.WORKSPACE_ID }} start
+          working-directory: ${{ steps.workspace-path.outputs.dir }}
+          wait-on: 'http://localhost:3000'

@@ -1,0 +1,97 @@
+// Import mixins
+@import 'mixins';
+
+//===========================
+// Colors
+//===========================
+// When you add a new variable in here, make sure to add it to the
+// exports declaration at the end of the file.
+// This will make sure it ends up in the style guide swatches.
+$color-endless-potential: #000321;
+$color-nittany-navy: #001e44;
+$color-beaver-blue: #1e407c;
+$color-midnight-blue: #002e69;
+$color-white-out: #ffffff;
+$color-old-coaly: #444444;
+$color-creek: #3ea39e;
+$color-creek-light: #cfeceb;
+$color-creek-max-light: #edf8f7;
+$color-limestone: #a2aaad;
+$color-limestone-light: #e4e5e7;
+$color-limestone-max-light: #f2f2f4;
+$color-slate: #314d64;
+$color-slate-light: #ccdae6;
+$color-slate-max-light: #eef3f7;
+$color-lion-shrine: #b88965;
+$color-lion-shrine-light: #f7f2ee;
+$color-lion-shrine-max-light: #fdfbf5;
+$color-pa-sky: #009cde;
+$color-lions-roar: #bf8226;
+$color-lions-roar-light: #f9eddc;
+$color-lions-roar-max-light: #fffaf2;
+$color-social-share-icons: rgb(0, 95, 169);
+
+// Elements
+$color-pa-link: #005fa9;
+$color-pa-link-light: #ccf0ff;
+$color-button-hover: linear-gradient(
+  to bottom,
+  var(--color-pa-sky),
+  var(--color-beaver-blue)
+);
+$color-footer-gradient: linear-gradient(
+  to bottom,
+  $color-midnight-blue 0%,
+  $color-nittany-navy 65%,
+  $color-nittany-navy 100%
+);
+
+// Alerts
+$color-original-87: #bc204b;
+$color-original-87-dark: #98022b;
+$color-bright-keystone: #ffd100;
+$color-futures-calling: #99cc00;
+$color-futures-calling-dark: #4a7729;
+
+// Exporting the variables here so we can display them in the style guide.
+:export {
+  // sass-lint:disable-block no-misspelled-properties no-color-keywords
+  mainpalette: {
+    endlesspotential: $color-endless-potential;
+    nittanynavy: $color-nittany-navy;
+    beaverblue: $color-beaver-blue;
+    midnightblue: $color-midnight-blue;
+    whiteout: $color-white-out;
+    oldcoaly: $color-old-coaly;
+    creek: $color-creek;
+    creeklight: $color-creek-light;
+    creekmaxlight: $color-creek-max-light;
+    limestone: $color-limestone;
+    limestonelight: $color-limestone-light;
+    limestonemaxlight: $color-limestone-max-light;
+    slate: $color-slate;
+    slatelight: $color-slate-light;
+    slatemaxlight: $color-slate-max-light;
+    lionshrine: $color-lion-shrine;
+    lionshrinelight: $color-lion-shrine-light;
+    lionshrinemaxlight: $color-lion-shrine-max-light;
+    pasky: $color-pa-sky;
+    lionsroar: $color-lions-roar;
+    lionsroarlight: $color-lions-roar-light;
+    lionsroarmaxlight: $color-lions-roar-max-light;
+  }
+  elementpalette: {
+    palink: $color-pa-link;
+    palinklight: $color-pa-link-light;
+    brightkeystone: $color-bright-keystone;
+    buttonhover: $color-button-hover;
+  }
+  alertpalette: {
+    original87: $color-original-87;
+    original87dark: $color-original-87-dark;
+    brightkeystone: $color-bright-keystone;
+    futurescalling: $color-futures-calling;
+    futurescallingdark: $color-futures-calling-dark;
+    creeklight: $color-creek-light;
+  }
+}

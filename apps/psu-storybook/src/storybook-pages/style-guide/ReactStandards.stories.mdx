@@ -1,0 +1,126 @@
+// import { Meta } from '@storybook/addon-docs/';
+// import { Icon } from '@psu-flex/core-ui';
+
+// <Meta title="Style Guide/Development Patterns/React Patterns" />
+
+// <h1>Best practice React design patterns</h1>
+
+// <h2>Single responsibility principle</h2>
+// <p>
+// This states that every element should have responsibility for a specific,
+// single part of the functionality provided by the application — not more and
+// not less. When deciding what how much functionality one component should hold,
+// this principal should be the guide. Each responsibility should be broken into
+// multiple pieces to improve scalability, reusability, and ease of management.
+// </p>
+
+// <h3>Compound components pattern</h3>
+// <p>
+// Use case - use the Compound Components Pattern to write React components that implicitly share state while giving rendering flexibility to the user.
+
+// Pros -
+// Solve issues related to building reusable components.
+// Development of highly cohesive components with minimal coupling.
+// Better ways to share logic between components.
+// Avoids prop drilling by passing props to respective children and reduces complexity.
+// Parent controls all state function, and communicates it to the children.
+
+// </p>
+
+// `jsx // function Example() { // return ( // <Menu> // <MenuButton>Actions</MenuButton> // <MenuList> // <MenuItem>Download</MenuItem> // <MenuLink to="view">View</MenuLink> // </MenuList> // </Menu> // ); // } // `
+
+// <h3>Higher order components pattern</h3>
+// <p>
+// Use case - based on whatever UI state you get from the high order component,
+// you can render specific styles for specific UI states. For example, if the
+// need arises in multiple places for styles like backgroundColor, fontSize and
+// so on, they can be provided via a HOC by wrapping the component with one that
+// just injects props with the specific className
+// </p>
+
+// ```jsx
+// const withStyling = (BaseComponent) => (props) =>
+// <BaseComponent {...props} style={{ fontWeight: 700, color: 'green' }} />;
+
+// const EnhancedHello = withStyling(HelloComponent);
+// ```
+
+// <h3>Prop collections pattern</h3>
+// <p>Use case - use the prop collections pattern to improve the render prop API and avoid repeating props.
+
+// Prop collections - prop collections containing all the required or default props for a component.
+
+// </p>
+
+// ```jsx
+// function useToggle() {
+// const [on, setOn] = useState(false);
+// const toggle = () => setOn(!on);
+
+// return {
+// on,
+// toggle,
+// toggleProps: {
+// on,
+// onClick: toggle,
+// 'aria-pressed': on,
+// },
+// };
+// }
+// ```
+
+// <p>This enables us to add all default props to components more easily:</p>
+
+// `jsx // const PropCollectionsAndGetters = () => { // const { on, toggleProps } = useToggle(); // return ( // <Wrapper> // <Animation on={on}> // <Button {...toggleProps} aria-label="toggle-button" /> // </Animation> // <Switch {...toggleProps} /> // </Wrapper> // ); // }; //`
+
+// <h3>Controlled props pattern</h3>
+
+// <p>
+// Use case - This pattern enables you to control a component UI state from the parent component.
+
+// This is done by handling the callback and managing the state within the parent component. The state and the method for updating the state are passed as props to the component. The component then becomes a controlled component.
+
+// To create a controlled component, you declare the state and function to update it in the parent component, these are then passed into the controlled component as props. The component is initialized with the prop state and when the state needs to be updated, the callback function prop for updating the state is triggered. After that update propagates, the containing component should end up re-rendering and sending a new state prop to the controlled component
+
+// You can make your component more flexible by letting the component use its internal state and also be overridden by a parent's state!
+
+// The component can then be either a controlled component when you declare your state value and the function to update it in the parent component then pass it to the component. Or an uncontrolled component these props are not passed in, allowing your component to manage its state internally. You just think of this as a switch mechanism between both patterns.
+
+// </p>
+
+// <h3>Component composition pattern</h3>
+// <p>
+// Use case - Avoid prop drilling by explicitly passing one or more component(s)
+// to another component as that component’s prop, which can then be extracted and
+// rendered within that component
+// </p>
+
+// ```jsx
+// import { useState } from 'react';
+
+// function App() {
+// const [data, setData] = useState('some state');
+// return <ComponentOne ComponentTwo={<ComponentTwo data={data} />} />;
+// }
+
+// function ComponentOne({ ComponentTwo }) {
+// return (
+// <div>
+// <p>This is Component1, it receives component2 as a prop and renders it</p>
+// {ComponentTwo}
+// </div>
+// );
+// }
+
+// function ComponentTwo({ data }) {
+// return <h3>This is Component two with the received state {data}</h3>;
+// }
+// ```
+
+// <p>
+// Rather than nesting components within components, and then struggling to pass
+// data to them through prop drilling, we can simply lift these components to our
+// root app, and then manually pass the intended child components to the parent
+// component with the intended data attached directly to the child component.
+// Then, the parent component will render it as a prop.
+// </p>

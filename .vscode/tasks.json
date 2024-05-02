@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "apps/psu-storybook",
+      "problemMatcher": [],
+      "label": "npm: dev - apps/psu-storybook",
+      "detail": "start-storybook dev -p 6006"
+    },
+    {
+      "type": "npm",
+      "script": "chromatic",
+      "path": "apps/psu-storybook",
+      "problemMatcher": [],
+      "label": "npm: chromatic - apps/psu-storybook",
+      "detail": "chromatic --only-changed --project-token=chpt_ec908d076a66902 --exit-once-uploaded"
+    },
+    {
+      "type": "npm",
+      "script": "clean-modules",
+      "problemMatcher": [],
+      "label": "npm: clean-modules",
+      "detail": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' ';'"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "apps/psu-research-discovery",
+      "problemMatcher": [],
+      "label": "npm: dev - apps/psu-research-discovery",
+      "detail": "next"
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+<!-- HooksGuide.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { themes, ThemeUIProvider, convert, ensure } from '@storybook/theming';
+import { theme } from '@psu-flex/core-ui';
+
+<Meta title="Utility/Hooks/Hooks Guide" />
+
+# Utility Hooks
+
+<div style={{ borderBottom: '1px solid gray', marginBottom: '2rem' }} />
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>useToggle Hook</h2>
+
+<p>
+  Use the useToggle hook when you need to toggle an element's state from true to
+  false
+</p>
+
+```jsx
+// Instead of doing this
+
+import { useState } from '..';
+
+const YourComponent = () => {
+  const [show, setShow] = useState(false);
+
+  const toggleShowTrue = () => {
+    setShow(true);
+  };
+  const toggleShowFalse = () => {
+    setShow(false);
+  };
+
+  return (
+    <>
+      <button onClick={() => (!show ? toggleShowTrue() : toggleShowFalse())}>
+        Click to toggle
+      </button>
+      {isToggle && (
+        <p>This text is shown or hidden by using the useToggle hook</p>
+      )}
+    </>
+  );
+};
+```
+
+```jsx
+// You can use the useToggle hook to do the same thing with less code
+
+import { useToggle } from '..';
+
+const YourComponent = () => {
+  const [isToggle, setIsToggle] = useToggle(false);
+
+  return (
+    <>
+      <button onClick={setIsToggle}>Click to toggle</button>
+      {isToggle && (
+        <p>This text is shown or hidden by using the useToggle hook</p>
+      )}
+    </>
+  );
+};
+```
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>useEscapeKey Hook</h2>
+
+<p>
+  Use the useEscapeKey hook when you need to link the escape key to a function
+</p>
+
+```jsx
+import { useEscapeKey } from '..';
+
+const YourComponent = () => {
+  const [isOpen, setIsOpen] = useToggle(true);
+  useEscapeKey(() => setIsOpen(false));
+
+  return (
+    <div>
+      <div>Example dropdown</div>
+      {isOpen && (
+        <div className="flex-col">
+          <div>Menu Item 1</div>
+          <div>Menu Item 2</div>
+          <div>Menu Item 3</div>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>useFlex Hook</h2>
+
+<p>
+  Use the useFlex hook when you need to target a Flex component with props from
+  the parent that are intended specifically for the Flex
+</p>
+
+```jsx
+import { useFlex } from '..'
+
+const YourComponent = (props) => {
+  let flexProps = useFlex(props);
+
+    return (
+      <div>
+        <Flex {...flexProps}>
+          <div>nested flex item 1</div>
+          <div>nested flex item 2</div>
+          <div>nested flex item 3</div>
+        </Flex>
+      </div>
+    );
+}
+
+  ...
+
+  // now in an implementation, any FlexProps we pass into the top level component will
+  // target the Flex component nested inside.
+
+  ...
+
+  <YourComponent direction="column" gap={4} />
+
+  ...
+```
+
+<h2 style={{ border: 'none', marginTop: '50px' }}>useIndexedList</h2>
+
+<p>
+  Use the useIndexedList hook when you need to add an index property to each
+  element in an array
+</p>
+
+```jsx
+import { useIndexedList } from '..'
+
+// original listOptionsArray:
+// [{name: 'item 1'}, {name: 'item 2'}, {name: 'item 3'}]
+
+let indexedListOptionsArray = useIndexedList(listOptionsArray);
+
+// new indexedListOptionsArray:
+// [{name: 'item 1', index: 0}, {name: 'item 2', index: 1}, {name: 'item 3', index: 2}]
+
+// now if using a ListBox, we can access the index of the items to add conditions
+
+<ListBox items={indexedListOptionsArray}>
+  {(item) => (
+    <Item key={item}>
+      <Link
+        extraSx={{
+          backgroundColor: item.index === indexedListOptionsArray.length - 1 ? 'nittanyNavy' : 'link'
+        }}
+        to={item.href}
+      >
+        {item.value}
+      </Link>
+    </Item>
+  )}
+</ListBox>
+
+...
+```
